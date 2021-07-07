@@ -9,13 +9,7 @@ gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dab
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4'
 # Use postgresql as the database for Active Record
-group :development, :test do
-  gem 'sqlite3', '~> 1.4'
-end
-
-group :production do
-  gem 'pg', '>= 0.18', '< 2.0'
-end
+gem 'pg', '>= 0.18', '< 2.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
