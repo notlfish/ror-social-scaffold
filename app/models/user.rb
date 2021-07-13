@@ -5,13 +5,26 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true, length: { maximum: 20 }
+  validates :password_confirmation, presence: true
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  has_many :invitations
-  has_many :pending_invitations, -> { where confirmed: false }, class_name: 'invitation', foreign_key: 'friend_id'
+  has_many :invitations, dependent: :destroy
+
+  has_many :invitations_sent_confirmed, -> { where confirmed: true },
+           class_name: 'Invitation'
+  has_many :invited_friends, through: :invitations_sent_confirmed,
+           source: :friend, class_name: 'User'
+
+  has_many :pending_invitations, -> { where confirmed: false },
+           class_name: 'invitation', foreign_key: 'friend_id'
+  has_many :invitations_received_confirmed, -> { where confirmed: true },
+           class_name: 'Invitation', foreign_key: 'friend_id'
+  has_many :inviter_friends, through: :invitations_received_confirmed,
+           source: :user, class_name: 'User'
+
 
   def friends
     friends_sent_invitation = Invitation.where(user_id: id, confirmed: true).pluck(:friend_id)
