@@ -43,14 +43,13 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'capybara'
   gem 'rspec-rails', '~> 4.0.0'
-  #gem 'selenium-webdriver'
+  # gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'webdrivers'
 end
 
 group :test do
-
 end
 
 group :development do

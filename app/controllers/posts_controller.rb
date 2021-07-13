@@ -20,11 +20,11 @@ class PostsController < ApplicationController
   private
 
   def timeline_posts
-    relevant_posts = current_user.posts.select { |post| post.created_at }
+    relevant_posts = current_user.posts.select(&:created_at)
     current_user.friends.includes(:posts).each do |friend|
       relevant_posts += friend.posts
     end
-    @timeline_posts = relevant_posts.sort { |p1, p2|  p2.created_at <=> p1.created_at }
+    @timeline_posts = relevant_posts.sort { |p1, p2| p2.created_at <=> p1.created_at }
   end
 
   def post_params
