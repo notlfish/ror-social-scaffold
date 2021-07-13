@@ -1,6 +1,6 @@
-# Scaffold for social media app with Ruby on Rails
+# Social media app with Ruby on Rails
 
-> This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
+> This is a social media app featuring Friendships, friendship request, posts, comments and likes.
 
 ## Built With
 
@@ -18,13 +18,15 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-Ruby: 2.6.3
-Rails: 5.2.3
-Postgres: >=9.5
+- Ruby v2.7.0
+- Ruby on Rails v5.2.4
+- Postgres: >=9.5
+
+**This project is not supported by ruby 3.x or rails 6.x**
 
 ### Setup
 
-Instal gems with:
+Install gems with dependancies:
 
 ```
 bundle install
@@ -32,20 +34,12 @@ bundle install
 
 Setup database with:
 
+**Configure postgress for the database to work**
+
 ```
    rails db:create
    rails db:migrate
 ```
-
-### Github Actions
-
-To make sure the linters' checks using Github Actions work properly, you should follow the next steps:
-
-1. On your recently forked repo, enable the GitHub Actions in the Actions tab.
-2. Create the `feature/branch` and push.
-3. Start working on your milestone as usual.
-4. Open a PR from the `feature/branch` when your work is done.
-
 
 ### Usage
 
@@ -58,20 +52,30 @@ Start server with:
 Open `http://localhost:3000/` in your browser.
 
 ### Run tests
+Run test from the project root directory
+- `bundle exec rpsec` to run all the test
+- `bundle exec rspec spec/models` to run unit tests
+- `bundle exec rspec spec/features` to run integration tests.
 
-```
-    rpsec --format documentation
-```
+**Chrome is needed to run the integration tests**
 
-> Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
 
 ### Deployment
 
-TBA
+To be done in the next milestone.
 
 ## Authors
+👤 **Ihedoro Fortunatus**
 
-TBA
+- GitHub: [@fortuneonyeka](https://github.com/fortuneonyeka/)
+- Twitter: [@onyekafortune](https://twitter.com/AngelaCunaDev)
+- LinkedIn: [@fortunatus-ihedoro](https://www.linkedin.com/in/fortunatus-ihedoro/)
+
+👤 **Lucas Ferrari Soto**
+
+- GitHub: [@notlfish](https://github.com/notlfish)
+- Twitter: [@LucasFerrariSo1](https://twitter.com/LucasFerrariSo1)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/lucas-mauricio-ferrari-soto-472a3515a/)
 
 ## 🤝 Contributing
 
@@ -85,9 +89,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-TBA
+This code is a project for [Microverse](https://www.microverse.org/), and its specification was taken from [The Odin Project](https://www.theodinproject.com/home)
 
 ## 📝 License
 
-TBA
-
+This project is [MIT](./LICENSE) licensed.
