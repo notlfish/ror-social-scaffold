@@ -58,4 +58,33 @@ RSpec.describe 'Freature test' do
       expect(page).to have_content 'Invalid Email or password.'
     end
  end
-end 
+
+ describe 'save post', type: :feature do
+  it 'creates a post' do
+    visit 'users/sign_in'
+    within('#new_user') do
+      fill_in 'Email', with: 'user1@example.com'
+      fill_in 'Password', with: '123456'
+    end
+    click_button 'Log in'
+    within('#new_post') do
+     fill_in 'post_content', with: 'hello world'
+     click_button 'Save'
+  end
+     expect(page).to have_content 'Post was successfully created'
+ end
+  it 'creates a post' do
+    visit 'users/sign_in'
+    within('#new_user') do
+      fill_in 'Email', with: 'user1@example.com'
+      fill_in 'Password', with: '123456'
+    end
+    click_button 'Log in'
+    within('#new_post') do
+     fill_in 'post_content', with: ''
+     click_button 'Save'
+  end
+     expect(page).to have_content "Post could not be saved. Content can't be blank"
+ end
+ end 
+end

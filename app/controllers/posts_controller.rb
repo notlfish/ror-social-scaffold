@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   private
 
   def timeline_posts
-    relevant_posts = current_user.posts
+    relevant_posts = current_user.posts.select { |post| post.created_at }
     current_user.friends.includes(:posts).each do |friend|
       relevant_posts += friend.posts
     end
