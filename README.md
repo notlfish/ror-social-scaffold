@@ -68,18 +68,7 @@ Run test from the project root directory
 
 To be done in the next milestone.
 
-## Authors
-👤 **Ihedoro Fortunatus**
 
-- GitHub: [@fortuneonyeka](https://github.com/fortuneonyeka/)
-- Twitter: [@onyekafortune](https://twitter.com/AngelaCunaDev)
-- LinkedIn: [@fortunatus-ihedoro](https://www.linkedin.com/in/fortunatus-ihedoro/)
-
-👤 **Lucas Ferrari Soto**
-
-- GitHub: [@notlfish](https://github.com/notlfish)
-- Twitter: [@LucasFerrariSo1](https://twitter.com/LucasFerrariSo1)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/lucas-mauricio-ferrari-soto-472a3515a/)
 
 ## 🤝 Contributing
 
@@ -91,10 +80,3 @@ Feel free to check the [issues page](issues/).
 
 Give a ⭐️ if you like this project!
 
-## Acknowledgments
-
-This code is a project for [Microverse](https://www.microverse.org/), and its specification was taken from [The Odin Project](https://www.theodinproject.com/home)
-
-## 📝 License
-
-This project is [MIT](./LICENSE) licensed.
