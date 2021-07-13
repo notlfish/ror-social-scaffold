@@ -22,5 +22,5 @@ def populate_user_posts(number_of_users)
   end
 end
 
-populate_users(10)
-populate_user_posts(10)
+populate_users(5)
+populate_user_posts(5)
