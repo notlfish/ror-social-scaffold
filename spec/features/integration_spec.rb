@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Some description' do
+RSpec.describe 'Freature test' do
   # Populate the database
   before :each do
     user = User.create(name: 'User1',
@@ -19,5 +19,16 @@ RSpec.describe 'Some description' do
       click_button 'Log in'
       expect(page).to have_content 'Signed in successfully.'
     end
-  end
-end
+
+
+    it 'logs in' do
+      visit 'users/sign_in'
+      within('#new_user') do
+        fill_in 'Email', with: ''
+        fill_in 'Password', with: '123456'
+      end
+      click_button 'Log in'
+      expect(page).to have_content 'Invalid Email or password.'
+    end
+ end
+end 
