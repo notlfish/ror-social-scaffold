@@ -13,9 +13,9 @@ RSpec.describe User, type: :model do
       users = []
       5.times do |n|
         user = User.create(name: "User#{n}",
-                    email: "user#{n}@example.com",
-                    password: '123456',
-                    password_confirmation: '123456')
+                           email: "user#{n}@example.com",
+                           password: '123456',
+                           password_confirmation: '123456')
         users[n] = user
       end
       (1..4).each do |n|

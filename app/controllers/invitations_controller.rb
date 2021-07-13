@@ -23,6 +23,6 @@ class InvitationsController < ApplicationController
   def destroy
     invitation = Invitation.find(params[:id])
     invitation.destroy
-    redirect_to current_user, notice: "Invitation successfully rejected."
+    redirect_to current_user, notice: 'Invitation successfully rejected.'
   end
 end
