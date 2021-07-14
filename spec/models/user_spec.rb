@@ -98,8 +98,6 @@ RSpec.describe User, type: :model do
 
     it 'show posts relevant to User0' do
       user0 = User.find_by(name: 'User0')
-      user2 = User.find_by(name: 'User2')
-      user4 = User.find_by(name: 'User4')
 
       messages = ["Hello, I'm User4", "Hello, I'm User2", "Hello, I'm User0"]
       fetched_messages = user0.relevant_posts.map(&:content)

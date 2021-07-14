@@ -23,7 +23,7 @@ class User < ApplicationRecord
            class_name: 'Invitation', foreign_key: 'friend_id'
 
   def relevant_posts
-    ids = self.friends.pluck(:id) << self.id
+    ids = friends.pluck(:id) << id
     Post.where(user_id: ids).ordered_by_most_recent
   end
 
