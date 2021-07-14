@@ -8,6 +8,21 @@ RSpec.describe User, type: :model do
     end
   end
 
+  def create_invitation_pair(inviter, invitee, confirmed)
+    Invitation.create(
+      user_id: inviter.id,
+      friend_id: invitee.id,
+      confirmed: confirmed,
+      inviter_id: inviter.id
+    )
+    Invitation.create(
+      user_id: invitee.id,
+      friend_id: inviter.id,
+      confirmed: confirmed,
+      inviter_id: inviter.id
+    )
+  end
+
   describe 'Test associations' do
     before(:each) do
       users = []
@@ -19,11 +34,7 @@ RSpec.describe User, type: :model do
         users[n] = user
       end
       (1..4).each do |n|
-        Invitation.create(
-          user_id: users[0].id,
-          friend_id: users[n].id,
-          confirmed: n.even?
-        )
+        create_invitation_pair(users[0], users[n], n.even?)
       end
     end
 
@@ -37,22 +48,24 @@ RSpec.describe User, type: :model do
       expect(user.pending_invitations.count).to eq(1)
     end
 
-    it 'user is associated to their invited friends' do
-      user = User.find_by(name: 'User0')
-      expect(user.invited_friends.count).to eq(2)
-    end
-
-    it 'user is associated to their inviting friends' do
-      user = User.find_by(name: 'User2')
-      expect(user.inviter_friends.count).to eq(1)
-    end
-
     it 'dependent objects get destroyed with the user' do
       user = User.find_by(name: 'User0')
       post = user.posts.create(content: 'A jolly good post')
       post_id = post.id
       user.destroy
       expect(Post.find_by(id: post_id)).to eq(nil)
+    end
+
+    it 'user is associated to all of their friends' do
+      user2 = User.find_by(name: 'User2')
+      user3 = User.find_by(name: 'User3')
+      create_invitation_pair(user2, user3, true)
+
+      user0 = User.find_by(name: 'User0')
+      manual_fetch = [user0, user3].map { |user| user.name }
+      association_fetch = user2.friends.map { |user| user.name }
+
+      expect(association_fetch).to match_array(manual_fetch)
     end
   end
 end

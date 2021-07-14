@@ -14,25 +14,12 @@ class User < ApplicationRecord
 
   has_many :invitations, dependent: :destroy
 
-  has_many :invitations_sent_confirmed, -> { where confirmed: true },
+  has_many :invitations_confirmed, -> { where confirmed: true },
            class_name: 'Invitation'
-  has_many :invited_friends, through: :invitations_sent_confirmed,
-                             source: :friend, class_name: 'User'
+  has_many :friends, through: :invitations_confirmed, source: :friend
 
   has_many :pending_invitations, -> { where confirmed: false },
            class_name: 'invitation', foreign_key: 'friend_id'
-  has_many :invitations_received_confirmed, -> { where confirmed: true },
-           class_name: 'Invitation', foreign_key: 'friend_id'
-  has_many :inviter_friends, through: :invitations_received_confirmed,
-                             source: :user, class_name: 'User'
-
-  def friends
-    friends_sent_invitation = Invitation.where(user_id: id, confirmed: true).pluck(:friend_id)
-    friends_got_invitation = Invitation.where(friend_id: id, confirmed: true).pluck(:user_id)
-
-    ids = friends_sent_invitation + friends_got_invitation
-    User.where(id: ids)
-  end
 
   def friend_with?(user)
     invitation.confirmed_record?(id, user.id)
