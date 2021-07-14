@@ -7,9 +7,6 @@
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
 
-## Live Demo
-
-TBA
 
 ## Screenshot
 ![All Users Page](assets/images/Ror-all-users.png)
@@ -24,9 +21,9 @@ To get a local copy up and running follow these simple example steps.
 
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
-- Postgres: >=9.5
 
 **This project is not supported by ruby 3.x or rails 6.x**
+Postgres: >=9.5
 
 ### Setup
 
@@ -64,10 +61,19 @@ Run test from the project root directory
 **Chrome is needed to run the integration tests**
 
 
-### Deployment
+## Authors
 
-To be done in the next milestone.
+👤 **Ihedoro Fortunatus**
 
+- GitHub: [@fortuneonyeka](https://github.com/fortuneonyeka/)
+- Twitter: [@onyekafortune](https://twitter.com/AngelaCunaDev)
+- LinkedIn: [@fortunatus-ihedoro](https://www.linkedin.com/in/fortunatus-ihedoro/)
+
+👤 **Lucas Ferrari Soto**
+
+- GitHub: [@notlfish](https://github.com/notlfish)
+- Twitter: [@LucasFerrariSo1](https://twitter.com/LucasFerrariSo1)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/lucas-mauricio-ferrari-soto-472a3515a/)
 
 
 ## 🤝 Contributing
@@ -80,3 +86,10 @@ Feel free to check the [issues page](issues/).
 
 Give a ⭐️ if you like this project!
 
+## Acknowledgments
+
+Forked and expanded from [microverse repository](https://github.com/microverseinc/ror-social-scaffold)
+
+## 📝 License
+
+TBA
