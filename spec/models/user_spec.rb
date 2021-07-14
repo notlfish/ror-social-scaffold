@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'Test validations' do
-    it 'user id invalid when there is no password confirmation' do
-      user = User.new(name: 'user', email: 'user@example.com', password: '123456')
-      expect(user.valid?).to be(false)
-    end
+  def create_post(user)
+    user.posts.create(content: "Hello, I'm #{user.name}")
   end
 
   def create_invitation_pair(inviter, invitee, confirmed)
@@ -23,21 +20,29 @@ RSpec.describe User, type: :model do
     )
   end
 
-  describe 'Test associations' do
-    before(:each) do
-      users = []
-      5.times do |n|
-        user = User.create(name: "User#{n}",
-                           email: "user#{n}@example.com",
-                           password: '123456',
-                           password_confirmation: '123456')
-        users[n] = user
-      end
-      (1..4).each do |n|
-        create_invitation_pair(users[0], users[n], n.even?)
-      end
+  before(:each) do
+    users = []
+    5.times do |n|
+      user = User.create(name: "User#{n}",
+                         email: "user#{n}@example.com",
+                         password: '123456',
+                         password_confirmation: '123456')
+      create_post(user)
+      users[n] = user
     end
+    (1..4).each do |n|
+      create_invitation_pair(users[0], users[n], n.even?)
+    end
+  end
 
+  describe 'Test validations' do
+    it 'user id invalid when there is no password confirmation' do
+      user = User.new(name: 'user', email: 'user@example.com', password: '123456')
+      expect(user.valid?).to be(false)
+    end
+  end
+
+  describe 'Test associations' do
     it 'user is associated to their sent invitations' do
       user = User.find_by(name: 'User0')
       expect(user.invitations.count).to eq(4)
@@ -62,10 +67,44 @@ RSpec.describe User, type: :model do
       create_invitation_pair(user2, user3, true)
 
       user0 = User.find_by(name: 'User0')
-      manual_fetch = [user0, user3].map { |user| user.name }
-      association_fetch = user2.friends.map { |user| user.name }
+      manual_fetch = [user0, user3].map(&:name)
+      association_fetch = user2.friends.map(&:name)
 
       expect(association_fetch).to match_array(manual_fetch)
+    end
+  end
+
+  describe 'Instance methods' do
+    it 'user can be invited' do
+      user1 = User.find_by(name: 'User1')
+      user2 = User.find_by(name: 'User2')
+
+      expect(user1.invitable?(user2)).to be(true)
+    end
+
+    it "user can't be invited -- pending" do
+      user0 = User.find_by(name: 'User0')
+      user1 = User.find_by(name: 'User1')
+
+      expect(user0.invitable?(user1)).to be(false)
+    end
+
+    it "user can't be invited -- friend" do
+      user0 = User.find_by(name: 'User0')
+      user2 = User.find_by(name: 'User2')
+
+      expect(user0.invitable?(user2)).to be(false)
+    end
+
+    it 'show posts relevant to User0' do
+      user0 = User.find_by(name: 'User0')
+      user2 = User.find_by(name: 'User2')
+      user4 = User.find_by(name: 'User4')
+
+      messages = ["Hello, I'm User4", "Hello, I'm User2", "Hello, I'm User0"]
+      fetched_messages = user0.relevant_posts.map(&:content)
+
+      expect(fetched_messages).to eq(messages)
     end
   end
 end

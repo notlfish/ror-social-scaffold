@@ -23,8 +23,9 @@ class InvitationsController < ApplicationController
     invitations = fetch_invitations(params[:id])
     invitations.each { |inv| inv.confirmed = true }
 
+    user = User.find(Invitation.find(params[:id]).inviter_id)
     if invitations.all?(&:save)
-      redirect_to user, notice: 'You now have one more friend!'
+      redirect_to user, notice: "You are now friends with #{user.name}!"
     else
       render current_user, alert: invitations.reduce do |acc, inv|
         acc + inv.errors.full_messages

@@ -12,17 +12,17 @@ end
 RSpec.describe Post, type: :model do
   before(:each) do
     users = []
-      5.times do |n|
-        user = User.create(name: "User#{n}",
-                           email: "user#{n}@example.com",
-                           password: '123456',
-                           password_confirmation: '123456')
-        users[n] = user
-      end
-      (1..4).each do |n|
-        new_invitation(users[0], users[n], n.even?, users[0]).save
-        new_invitation(users[n], users[0], n.even?, users[0]).save
-      end
+    5.times do |n|
+      user = User.create(name: "User#{n}",
+                         email: "user#{n}@example.com",
+                         password: '123456',
+                         password_confirmation: '123456')
+      users[n] = user
+    end
+    (1..4).each do |n|
+      new_invitation(users[0], users[n], n.even?, users[0]).save
+      new_invitation(users[n], users[0], n.even?, users[0]).save
+    end
   end
 
   describe 'Validations' do
