@@ -26,7 +26,7 @@
     <%= link_to 'Sign in', user_session_path %>
     <% end %>
     <% if user_signed_in?%>
-    <%=link_to current_user.name%>
+    <%= link_to current_user.name, current_user %>
     <%end%>
   </nav>
   <% if notice.present? %>
