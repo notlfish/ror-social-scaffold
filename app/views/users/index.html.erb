@@ -1,5 +1,29 @@
-<section class="users-section">
-  <ul class="users-list">
-    <%= render @users %>
-  </ul>
-</section>
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+
+      <td><%= link_to user.name, user, class: "index-user" %></td>
+      <% if user.invitable?(current_user) %>
+      <td> <%= link_to 'Send friendship invitation',
+            invitations_path(user: current_user.id, friend: user.id),
+            method: 'post', class: 'friendship-invite' %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

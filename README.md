@@ -1,4 +1,4 @@
-# Scaffold for social media app with Ruby on Rails
+# Social media app with Ruby on Rails
 
 > This is a social media app featuring Friendships, friendship request, posts, comments and likes.
 
@@ -7,6 +7,10 @@
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
 
+
+## Screenshot
+![All Users Page](assets/images/Ror-all-users.png)
+![Timeline](assets/images/Ror-timeline.png)
 
 
 ## Getting Started
@@ -17,18 +21,21 @@ To get a local copy up and running follow these simple example steps.
 
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
+
 **This project is not supported by ruby 3.x or rails 6.x**
 Postgres: >=9.5
 
 ### Setup
 
-Instal gems with:
+Install gems with dependancies:
 
 ```
 bundle install
 ```
 
 Setup database with:
+
+**Configure postgress for the database to work**
 
 ```
    rails db:create
@@ -46,10 +53,12 @@ Start server with:
 Open `http://localhost:3000/` in your browser.
 
 ### Run tests
+Run test from the project root directory
+- `bundle exec rpsec` to run all the test
+- `bundle exec rspec spec/models` to run unit tests
+- `bundle exec rspec spec/features` to run integration tests.
 
-```
-    rpsec --format documentation
-```
+**Chrome is needed to run the integration tests**
 
 
 ## Authors
@@ -84,4 +93,3 @@ Forked and expanded from [microverse repository](https://github.com/microversein
 ## 📝 License
 
 TBA
-
