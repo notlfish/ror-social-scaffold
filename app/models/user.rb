@@ -18,15 +18,13 @@ class User < ApplicationRecord
            class_name: 'Invitation'
   has_many :friends, through: :invitations_confirmed, source: :friend
 
-  has_many :pending_invitations, -> { where confirmed: false },
-           class_name: 'invitation', foreign_key: 'friend_id'
+  has_many :pending_invitations,
+           ->(user) { where(confirmed: false).where.not(inviter_id: user.id) },
+           class_name: 'Invitation', foreign_key: 'friend_id'
 
-  def friend_with?(user)
-    invitation.confirmed_record?(id, user.id)
-  end
-
-  def pending_invitations
-    Invitation.where(friend_id: id, confirmed: false)
+  def relevant_posts
+    ids = self.friends.pluck(:id) << self.id
+    Post.where(user_id: ids).ordered_by_most_recent
   end
 
   def invitable?(user)
