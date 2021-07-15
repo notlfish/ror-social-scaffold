@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    timeline_posts
+    timeline_posts(current_user)
   end
 
   def create
@@ -12,19 +12,15 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: 'Post was successfully created.'
     else
-      timeline_posts
+      timeline_posts(current_user)
       render :index, alert: 'Post was not created.'
     end
   end
 
   private
 
-  def timeline_posts
-    relevant_posts = current_user.posts.select(&:created_at)
-    current_user.friends.includes(:posts).each do |friend|
-      relevant_posts += friend.posts
-    end
-    @timeline_posts = relevant_posts.sort { |p1, p2| p2.created_at <=> p1.created_at }
+  def timeline_posts(user)
+    @timeline_posts = user.relevant_posts
   end
 
   def post_params
