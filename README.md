@@ -2,15 +2,16 @@
 
 > This is a social media app featuring Friendships, friendship request, posts, comments and likes.
 
+## Screenshot
+![All Users Page](assets/images/Ror-all-users.png)
+![Timeline](assets/images/Ror-timeline.png)
+
+## [Live Version](https://infinite-plateau-85135.herokuapp.com/)
+
 ## Built With
 
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
-
-
-## Screenshot
-![All Users Page](assets/images/Ror-all-users.png)
-![Timeline](assets/images/Ror-timeline.png)
 
 
 ## Getting Started
