@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery prepend: true
+
+  rescue_from StandardError do |exception|
+    render json: { :error => exception.message }, :status => 500
+  end
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
