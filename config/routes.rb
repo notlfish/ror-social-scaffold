@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   root 'posts#index'
 
+  namespace :api,  defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :users, only: [:index, :show] do
+        resources :posts, only: [:index, :show, :create] do
+          resources :comments, only: [:index, :show, :create]
+        end
+      end
+    end
+  end
+
   devise_for :users,
              defaults: { format: :json },
              path: '',

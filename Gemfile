@@ -40,6 +40,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # User authentication
 gem 'devise'
 gem 'devise-jwt'
+gem 'dry-configurable', '0.9.0'
 gem 'rack-cors'
 
 group :development, :test do
