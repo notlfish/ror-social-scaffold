@@ -8,8 +8,9 @@ Rails.application.routes.draw do
          post 'logout', to: '/users/sessions#destroy', defaults: { format: :json }
          post 'signup', to: '/users/registrations#create', defaults: { format: :json }
       end
+      resources :posts, only: [:create]
       resources :users, only: [:index, :show] do
-        resources :posts, only: [:index, :show, :create] do
+        resources :posts, only: [:index, :show] do
           resources :comments, only: [:index, :show, :create]
         end
       end
