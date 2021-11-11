@@ -1,6 +1,7 @@
 # Social media app with Ruby on Rails
 
-> This is a social media app featuring Friendships, friendship request, posts, comments and likes.
+> This is a social media app featuring Friendships, friendship request, posts, comments and likes. Now it also features API responses with endpoints /api/v1 that respond to token authentication with JWT 
+
 
 ## Screenshot
 ![All Users Page](assets/images/Ror-all-users.png)
@@ -10,7 +11,7 @@
 
 ## Built With
 
-- Ruby v2.7.0
+- Ruby v2.7.2
 - Ruby on Rails v5.2.4
 
 
@@ -20,7 +21,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-- Ruby v2.7.0
+- Ruby v2.7.2
 - Ruby on Rails v5.2.4
 
 **This project is not supported by ruby 3.x or rails 6.x**
@@ -39,6 +40,7 @@ Setup database with:
 **Configure postgress for the database to work**
 
 ```
+   export DEVISE_JWT_SECRET_KEY=`bundle exec rake secret
    rails db:create
    rails db:migrate
 ```
@@ -53,6 +55,54 @@ Start server with:
 
 Open `http://localhost:3000/` in your browser.
 
+API endpoints:
+headers:
+{
+    'Content-Type': application/json' \
+}
+
+http://localhost:3000/api/v1/signup
+
+body:
+{ "user": { 
+    "name": "User name",
+    "email": "User email", 
+    "password": "User password", 
+    "password_confirmation": "User password confirmation" 
+    } 
+    
+}
+http://localhost:3000/api/v1/login
+
+body:
+{ "user": { 
+    "email": "User email", 
+    "password": "User password"    
+    }
+}
+
+**Login and Signup will return the Bearer JWT Token for authentication**
+
+headers: {
+    'Content-Type': application/json',
+    'Authorization': Bearer **JWT TOKEN**
+}
+
+GET
+http://localhost:3000/api/v1/users/:user_id/posts/:posts_id/comments
+
+POST
+http://localhost:3000/api/v1/posts
+
+http://localhost:3000/api/v1/users/:user_id/posts/:posts_id/comments
+
+body:
+{
+    "content": "your post or comment here"
+}
+
+
+
 ### Run tests
 Run test from the project root directory
 - `bundle exec rpsec` to run all the test
@@ -64,11 +114,12 @@ Run test from the project root directory
 
 ## Authors
 
-👤 **Ihedoro Fortunatus**
+## Author
 
-- GitHub: [@fortuneonyeka](https://github.com/fortuneonyeka/)
-- Twitter: [@onyekafortune](https://twitter.com/AngelaCunaDev)
-- LinkedIn: [@fortunatus-ihedoro](https://www.linkedin.com/in/fortunatus-ihedoro/)
+👤 **Andres Felipe Castañeda Ramos**
+- Github: [@afcastaneda223](https://github.com/afcastaneda223)
+- Twitter: [@afcastaneda](https://twitter.com/afcastaneda)
+- Linkedin: [Andres Felipe Castañeda](https://www.linkedin.com/in/andcast)
 
 👤 **Lucas Ferrari Soto**
 
