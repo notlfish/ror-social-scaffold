@@ -43,10 +43,17 @@ gem 'devise-jwt'
 gem 'dry-configurable', '0.9.0'
 gem 'rack-cors'
 
+# Documentation generation
+gem 'rswag-api'
+gem 'rswag-ui'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'capybara'
   gem 'rspec-rails', '~> 4.0.0'
+  # Documentation generation
+  gem 'rswag-specs'
+
   # gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

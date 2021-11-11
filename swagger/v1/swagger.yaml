@@ -1,0 +1,104 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/posts":
+    post:
+      summary: create post
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users/{user_id}/posts":
+    parameters:
+    - name: user_id
+      in: path
+      description: user_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list posts
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users/{user_id}/posts/{id}":
+    parameters:
+    - name: user_id
+      in: path
+      description: user_id
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show post
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users":
+    get:
+      summary: list users
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      responses:
+        '200':
+          description: successful
+  "/api/v1/login":
+    post:
+      summary: Authenticates an existing user
+      tags:
+      - Authentication
+      description: 'Returns a bearer token for '
+      parameters: []
+      responses:
+        '201':
+          description: blog created
+          content:
+            application/json:
+              example:
+                user:
+                  email: user1@example.com
+                  password: '123456'
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                required:
+                - email
+                - password
+              required:
+              - user
+servers:
+- url: http://localhost:3000/
+  variables:
+    defaultHost:
+      default: http://localhost:3000/
